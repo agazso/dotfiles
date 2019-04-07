@@ -46,6 +46,15 @@ vcs_info_git_ignore()
     git check-ignore -q . && vcs_info_msg_0_=""
 }
 
+vcs_info_repo()
+{
+    if [ "$vcs_info_msg_0_" = "" ]; then
+        vcs_info_repo_msg=""
+    else
+        vcs_info_repo_msg=$(gitrepo)
+    fi
+}
+
 # Execute before prompt
 precmd()
 {
@@ -53,6 +62,7 @@ precmd()
     setpromptcolor || true
     vcs_info || true
     vcs_info_git_ignore || true
+    vcs_info_repo || true
     saystatus || true
     command=
 }
@@ -179,12 +189,12 @@ function vcs_info_without_master_branch()
 zstyle ':vcs_info:*' stagedstr '+'
 zstyle ':vcs_info:*' unstagedstr '*'
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' formats '(%b%c%u) '
+zstyle ':vcs_info:*' formats '%b%c%u'
 zstyle ':vcs_info:*' enable git svn
 
 PROMPT_COLOR=$PR_YELLOW
 PROMPT_DARK_COLOR=$PR_LIGHT_YELLOW
-PROMPT='$PROMPT_COLOR%~ $PR_NO_COLOR$PROMPT_DARK_COLOR${vcs_info_msg_0_}$PROMPT_COLOR%# $PR_NO_COLOR'
+PROMPT='$PROMPT_COLOR%~ $PR_NO_COLOR$PROMPT_DARK_COLOR(${vcs_info_msg_0_}) $PROMPT_COLOR%# $PR_NO_COLOR'
 LISTMAX=2000
 REPORTTIME=60
 
@@ -267,3 +277,4 @@ autoload -U bashcompinit && bashcompinit
 
 eval "$(rbenv init -)"
 alias telnet='nc -v'
+alias gitrepo='git remote get-url --push origin'
