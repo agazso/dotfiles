@@ -162,6 +162,11 @@ function saystatus()
 TRAPZERR()
 {
     exitcode=$?
+    if [ $exitcode -gt 127 ]; then
+        signalcode=$(( exitcode - 128 ))
+        signalname=$(kill -l $signalcode)
+        echo "\e[91mSignal $signalcode $signalname\e[0m"
+    fi
     echo "\e[33mExit $exitcode\e[0m"
 }
 
