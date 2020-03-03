@@ -283,3 +283,4 @@ autoload -U bashcompinit && bashcompinit
 eval "$(rbenv init -)"
 alias telnet='nc -v'
 alias gitrepo='git remote get-url --push origin'
+alias shs='python -m SimpleHTTPServer'
