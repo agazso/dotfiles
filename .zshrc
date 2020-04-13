@@ -88,11 +88,6 @@ return applicationName
 EOF
 }
 
-terminal-notifier()
-{
-    /usr/local/Cellar/terminal-notifier/1.7.1/bin/terminal-notifier $*
-}
-
 function setpromptcolor()
 {
 	eval PROMPT_COLOR=$PR_YELLOW
