@@ -26,6 +26,7 @@ setopt prompt_subst
 #setopt share_history
 autoload -Uz vcs_info
 setopt debug_before_cmd
+setopt inc_append_history
 
 export PREEXEC_TIME=$(date +'%s')
 title()
@@ -43,7 +44,7 @@ git_working_dir()
 
 vcs_info_git_ignore()
 {
-    git check-ignore -q . && vcs_info_msg_0_=""
+    (git check-ignore -q . && vcs_info_msg_0_="") 2> /dev/null
 }
 
 vcs_info_repo()
