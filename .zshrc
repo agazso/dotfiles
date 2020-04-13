@@ -1,5 +1,4 @@
 # Thing to set in interactive sessions of zsh
-setopt append_history
 setopt auto_cd			#like implicit_cd in tcsh
 setopt auto_list		#like autoexpand in tcsh
 setopt no_auto_menu
@@ -23,10 +22,13 @@ setopt rm_star_silent
 setopt sh_word_split
 #setopt no_unset
 setopt prompt_subst
-#setopt share_history
 autoload -Uz vcs_info
 setopt debug_before_cmd
+
+# these three are mutually exclusive
+#setopt append_history
 setopt inc_append_history
+# setopt share_history
 
 export PREEXEC_TIME=$(date +'%s')
 title()
