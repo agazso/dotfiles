@@ -46,7 +46,7 @@ git_working_dir()
 
 vcs_info_git_ignore()
 {
-    (git check-ignore -q . && vcs_info_msg_0_="") 2> /dev/null
+    git check-ignore -q . && vcs_info_msg_0_=""
 }
 
 vcs_info_repo()
@@ -187,6 +187,12 @@ setcolors
 function vcs_info_without_master_branch()
 {
 	echo "${vcs_info_msg_0_}" | sed -e 's/master//'
+}
+
+function reload()
+{
+    source ~/.zshrc
+    source ~/.zshenv
 }
 
 zstyle ':vcs_info:*' stagedstr '+'
