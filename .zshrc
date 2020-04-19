@@ -192,7 +192,7 @@ function vcs_info_without_master_branch()
 function reload()
 {
     source ~/.zshrc
-    source ~/.zshenv
+    source ~/.zshenv 2> /dev/null
 }
 
 zstyle ':vcs_info:*' stagedstr '+'
