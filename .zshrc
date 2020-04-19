@@ -300,7 +300,7 @@ compctl -x 's[-f],c[-1,-f]' -f -- + -K get_targets make
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
-eval "$(rbenv init - || true)"
+eval "$(which rbenv > /dev/null 2>&1 && rbenv init - || true)"
 alias telnet='nc -v'
 alias gitrepo='git remote get-url --push origin'
 alias shs='python -m SimpleHTTPServer'
