@@ -30,6 +30,19 @@ setopt debug_before_cmd
 setopt inc_append_history
 # setopt share_history
 
+platform()
+{
+    if [ "$OSTYPE" = "linux-gnu" ]; then
+        echo "linux"
+    elif [ "$OS" = "MACOS" ]; then
+        echo "mac"
+    else
+        echo "unknown"
+    fi
+}
+
+PLATFORM=$(platform)
+
 export PREEXEC_TIME=$(date +'%s')
 title()
 {
@@ -143,9 +156,12 @@ function saystatus()
         if [ "$command" != "" ]; then
             print_elapsed $elapsed
         fi
+        if [ "$PLATFORM" != "mac" ]; then
+            return
+        fi
         focusedapp_name=$(focusedapp)
         if [ "$focusedapp_name" != "Terminal" ]; then
-        	command=$(echo ${command:t:r})
+            command=$(echo ${command:t:r})
             if [ $exitcode -eq 0 ]; then
                 terminal-notifier -message "$command finished" 2>&1 >> /dev/null
                 say "$command finished" &!
