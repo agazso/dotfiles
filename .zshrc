@@ -123,10 +123,19 @@ function padnumber()
     fi
 }
 
+function printable_time()
+{
+    if [ "$PLATFORM" = "mac" ]; then
+        date -r "$1" "+%H:%M:%S"
+    elif [ "$PLATFORM" = "linux" ]; then
+        date --date "@$1" "+%H:%M:%S"
+    fi
+}
+
 function print_elapsed()
 {
     elapsed=$1
-    start_time=$(date -r $PREEXEC_TIME "+%H:%M:%S")
+    start_time=$(printable_time $PREEXEC_TIME)
     current_time=$(date "+%H:%M:%S")
     elapsed_display="${elapsed}s"
     if [ "$elapsed" -gt 60 ]; then
