@@ -46,7 +46,7 @@ git_working_dir()
 
 vcs_info_git_ignore()
 {
-    git check-ignore -q . && vcs_info_msg_0_=""
+    git check-ignore -q . 2> /dev/null && vcs_info_msg_0_=""
 }
 
 vcs_info_repo()
@@ -284,7 +284,7 @@ compctl -x 's[-f],c[-1,-f]' -f -- + -K get_targets make
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
-eval "$(rbenv init -)"
+eval "$(rbenv init - || true)"
 alias telnet='nc -v'
 alias gitrepo='git remote get-url --push origin'
 alias shs='python -m SimpleHTTPServer'
