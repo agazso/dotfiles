@@ -151,6 +151,13 @@ function print_elapsed()
     echo "\e[90mStart time $start_time, end time $current_time, elapsed $elapsed_display\e[0m"
 }
 
+function say_and_notify()
+{
+    msg="$1"
+    terminal-notifier -message "$msg" 2>&1 >> /dev/null
+    say "$msg" 2>&1 >> /dev/null &!
+}
+
 function saystatus()
 {
     if [ "$SAYSTATUS" != "" ]; then
@@ -172,11 +179,9 @@ function saystatus()
         if [ "$focusedapp_name" != "Terminal" ]; then
             command=$(echo ${command:t:r})
             if [ $exitcode -eq 0 ]; then
-                terminal-notifier -message "$command finished" 2>&1 >> /dev/null
-                say "$command finished" &!
+                say_and_notify "$command finished"
             else
-                terminal-notifier -message "$command aborted with error $exitcode" 2>&1 >> /dev/null
-                say "$command aborted with error $exitcode" &!
+                say_and_notify "$command aborted with error $exitcode"
             fi
         fi
     fi
