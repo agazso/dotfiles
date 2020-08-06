@@ -34,7 +34,7 @@ platform()
 {
     if [ "$OSTYPE" = "linux-gnu" ]; then
         echo "linux"
-    elif [ "$OS" = "MACOS" ]; then
+    elif [[ $OSTYPE == darwin* ]]; then
         echo "mac"
     else
         echo "unknown"
@@ -241,9 +241,9 @@ HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
 
-if [[ "${TERM-}" == "ansi" ]] {
+if [[ "${TERM-}" == "ansi" ]]; then
 	TERM=vt100
-}
+fi
 bindkey '\e[1~' beginning-of-line
 bindkey '\e[4~' end-of-line
 bindkey '\e[3~' delete-char
